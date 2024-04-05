@@ -9,13 +9,13 @@ interface Props {
 
 const GameHeading = ({ gameQuery }: Props) => {
   const { data: genres } = useGenres();
-  const z_genre = genres?.results.find((r) => r.id === gameQuery.genreId);
+  const genre = genres?.results.find((r) => r.id === gameQuery.genreId);
 
   const { data: platforms } = usePlatforms();
-  const z_platform = platforms?.results.find(
+  const platform = platforms?.results.find(
     (p) => p.id === gameQuery.platformId
   );
-  const heading = `${z_platform?.name || ""} ${z_genre?.name || ""} Games`;
+  const heading = `${platform?.name || ""} ${genre?.name || ""} Games`;
 
   return (
     <Heading as="h1" marginY={5} fontSize="5xl">
