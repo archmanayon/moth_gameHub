@@ -19,7 +19,7 @@ const useGenres = () =>
     // refetchInterval: 1000 * 60 * 60 * 24 * 30,
     // refetchOnWindowFocus: false,
     // enabled: true,
-    initialData: { count: genres.length, results: genres },
+    // initialData: { count: genres.length, next: null, results: genres },
   });
 
 export default useGenres;
