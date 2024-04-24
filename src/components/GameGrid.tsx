@@ -1,15 +1,11 @@
 import { Box, Button, SimpleGrid, Text } from "@chakra-ui/react";
-import { GameQuery } from "../App";
-import useGames, { Platform } from "../hooks/useGames";
-import { Genre } from "../hooks/useGenres";
+import React from "react";
+import useGames, { Game } from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import GameCardSkeleton from "./GameCardSkeleton";
-import React from "react";
-import useGameQuerySort from "../store";
 
 const GameGrid = () => {
-  const gameQuery = useGameQuerySort((s) => s.gameQuery);
   const {
     data,
     error,
@@ -17,7 +13,7 @@ const GameGrid = () => {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
-  } = useGames(gameQuery);
+  } = useGames();
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   if (error) return <Text>{error.message}</Text>;
@@ -33,7 +29,7 @@ const GameGrid = () => {
           ))}
         {data?.pages.map((page, index) => (
           <React.Fragment key={index}>
-            {page.results.map((game) => (
+            {page.results.map((game: Game) => (
               <GameCardContainer key={game.id}>
                 <GameCard game={game} />
               </GameCardContainer>
