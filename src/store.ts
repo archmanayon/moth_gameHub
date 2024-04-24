@@ -18,21 +18,16 @@ type GameQueryS = {
 const useGameQuerySort = create<GameQueryS>((set) => ({
   gameQuery: {},
   setGenreId: (genreId) =>
-    set((store) => ({
-      ...store.gameQuery,
-      gameQuery: { genreId: genreId },
-    })),
+    set((store) => ({ gameQuery: { ...store.gameQuery, genreId: genreId } })),
   setPlatformId: (platformId) =>
     set((store) => ({
-      ...store.gameQuery,
-      gameQuery: { platformId: platformId },
+      gameQuery: { ...store.gameQuery, platformId: platformId },
     })),
   setSortOrder: (sortOrder) =>
     set((store) => ({
-      ...store.gameQuery,
-      gameQuery: { sortOrder: sortOrder },
+      gameQuery: { ...store.gameQuery, sortOrder: sortOrder },
     })),
-  findSearchText: (text) => set({ gameQuery: { searchText: text } }),
+  findSearchText: (text) => set(() => ({ gameQuery: { searchText: text } })),
 }));
 
 export default useGameQuerySort;
