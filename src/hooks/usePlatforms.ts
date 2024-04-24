@@ -12,7 +12,7 @@ interface Platform {
 const apiClient = new APIClient<Platform>("/platforms/lists/parents");
 
 const usePlatforms = () =>
-  useQuery({
+  useQuery<Platform>({
     queryKey: ["platforms"],
     queryFn: apiClient.get,
     // staleTime: 1000 * 60 * 60 * 24 * 30,

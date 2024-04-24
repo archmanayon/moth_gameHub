@@ -6,12 +6,10 @@ import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import GameCardSkeleton from "./GameCardSkeleton";
 import React from "react";
+import useGameQuerySort from "../store";
 
-interface Props {
-  gameQuery: GameQuery;
-}
-
-const GameGrid = ({ gameQuery }: Props) => {
+const GameGrid = () => {
+  const gameQuery = useGameQuerySort((s) => s.gameQuery);
   const {
     data,
     error,

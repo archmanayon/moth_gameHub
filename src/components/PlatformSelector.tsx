@@ -4,13 +4,11 @@ import { Platform } from "../hooks/useGames";
 import usePlatforms from "../hooks/usePlatforms";
 import { GameQuery } from "../App";
 import usePlatform from "../hooks/usePlatform";
+import useGameQuerySort from "../store";
 
-interface Props {
-  onSelectPlatform: (platform: Platform) => void;
-  selectedPlatformId: number;
-}
-
-const PlatformSelector = ({ onSelectPlatform, selectedPlatformId }: Props) => {
+const PlatformSelector = () => {
+  const selectedPlatformId = useGameQuerySort((s) => s.gameQuery.platformId);
+  const onSelectPlatform = useGameQuerySort((s) => s.setPlatformId);
   const { data, error } = usePlatforms();
 
   const selectedPlatform = usePlatform(selectedPlatformId);
@@ -25,7 +23,7 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatformId }: Props) => {
       <MenuList>
         {data?.results.map((platform) => (
           <MenuItem
-            onClick={() => onSelectPlatform(platform)}
+            onClick={() => onSelectPlatform(platform.id)}
             key={platform.id}
           >
             {platform.name}

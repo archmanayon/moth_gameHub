@@ -4,16 +4,16 @@ import useGenres from "../hooks/useGenres";
 import usePlatforms from "../hooks/usePlatforms";
 import usePlatform from "../hooks/usePlatform";
 import useGenre from "../hooks/useGenre";
+import useGameQuerySort from "../store";
 
-interface Props {
-  gameQuery: GameQuery;
-}
-
-const GameHeading = ({ gameQuery }: Props) => {
+const GameHeading = () => {
+  const gameQuery = useGameQuerySort((s) => s.gameQuery);
   const { data: genres } = useGenres();
   const genre = useGenre(gameQuery.genreId);
 
+  const { data: platforms } = usePlatforms();
   const platform = usePlatform(gameQuery.platformId);
+
   const heading = `${platform?.name || ""} ${genre?.name || ""} Games`;
 
   return (
